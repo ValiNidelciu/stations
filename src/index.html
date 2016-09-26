@@ -1,0 +1,103 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,src}) styles/app.css -->
+    <!-- inject:css -->
+    <!-- css files will be automatically insert here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+
+<body ng-app="vapp" >
+
+ 
+
+    <div ng-controller="StationController as vm">
+
+<img src="http://www.bstlhj6.com/data/out/117/4654491-loading-wallpapers.jpeg" style="width:100%;heigth:100%;z-index:9999" ng-show="vm.loadingStationList">
+<div class="container" ng-hide="vm.loadingStationList">
+<h1 class="text-center">Station list</h1>
+
+    
+    
+    <ul class="list-inline text-center">
+        <li ng-repeat="x in vm.list" ng-click="vm.showHistoryF()">
+        <button type="button" class="btn btn-large btn-block btn-default" ng-click="vm.showStations(x)">{{x.stationName}}</button>
+        </li>
+    </ul>
+    <div  ng-show="vm.show">
+    <label for="filter">Filter by:</label>
+    <select ng-model="vm.queryType" class="btn btn-large btn-default" name="filter">
+        <option selected value="0">Years</option>
+        <option value="1">Months</option>
+        <option value="2">Days</option>
+    </select>
+    
+    <button type="button" class="btn btn-succes" ng-click="vm.showHistoryF()">filter</button>
+   </div> 
+     <button type="button" class="btn btn-large btn-default" ng-click="vm.showTable=true;vm.showHistory=false" ng-show="vm.show">Real Time</button>
+     
+     <button type="button" class="btn btn-large btn-default" ng-show="vm.show" ng-click="vm.showHistoryF()">History</button>
+     
+    <div ng-show="vm.show" class="box">
+        
+       
+        
+         <table ng-show="vm.showTable">
+            <thead>
+                <tr class="text-center">
+                    <th>Serial Number</th>
+                    <th>Power</th>
+                    <th>eday</th>
+                    <th>etotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="y in vm.stationDetails">
+                    <td>{{y.inventersn}}</td>
+                    <td>{{y.power}}</td>
+                    <td>{{y.eday}}</td>
+                    <td>{{y.etotal}}</td>
+                </tr>
+            </tbody>
+        </table>
+       
+    </div>
+ 
+ <canvas style="width:200px;heigth:200px" id="line" class="chart chart-line reports_line_chart" chart-data="vm.lineChart.data"
+                    chart-labels="vm.lineChart.labels" chart-legend="true" chart-series="vm.lineChart.series" ng-show="vm.showHistory">
+</canvas>
+</div>
+
+
+
+    </div>
+    <!-- build:js(src) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- run `gulp inject` to automatically populate bower script dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+    <!-- inject:js -->
+    <!-- js files will be automatically insert here -->
+    <!-- endinject -->
+
+    <!-- inject:partials -->
+    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+</body>
+
+</html>
